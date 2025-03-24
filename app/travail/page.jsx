@@ -20,39 +20,42 @@ import WorkSliderBtns from '@/components/ui/WorkSliderBtns';
  const projects =[
   {
     num:'01',
-    category:'frontend',
-    title:' projet1',
-    description: "Si le problème persiste, il peut être utile de simplifier ton code et",
+    category:'ai',
+    title:' jarvis-ai',
+    description: " Jarvis-AI est un projet innovant qui explore les possibilités de l'IA pour créer des assistants personnels.",
     stack: [
-     {name: 'html 5'},{name: 'css 3'},{name: 'javascript'},
+     {name: 'python'},{name: 'qt'} ,
     ],
-    image:'/assets/assets/work/thumb1.png',
+    
+    
     live: '',
     github:"",
 
   },
   {
     num:'02',
-    category:'fullstack',
-    title:' projet2',
-    description: "Si le problème persiste, il peut être utile de simplifier ton code et",
+    category:'reseaux',
+    title:' dervox monitor server',
+    description: " un outil de surveillance et de gestion des serveurs, conçu pour offrir une vue d'ensemble des performances du réseau et de l'infrastructure serveur. ",
     stack: [
-      {name: 'html 5'},{name: 'css 3'},{name: 'javascript'},
+      {name: 'c#'},{name: 'vb.net'},{name: 'react'},
     ],
-    image:'/assets/assets/work/thumb2.png',
+    
+    
     live: '',
     github:"",
 
   },
   {
     num:'03',
-    category:'fullstack',
-    title:' projet3',
-    description: "Si le problème persiste, il peut être utile de simplifier ton code et",
+    category:'gaming',
+    title:' Shadow Realms',
+    description: "Shadow Realms est un jeu d'action palpitant où vous incarnez un guerrier légendaire, ",
     stack: [
-      {name: 'html 5'},{name: 'css 3'},{name: 'javascript'},
+      {name: 'unity'},{name: 'c++'},{name: 'laravel'},
     ],
-    image:'/assets/assets/work/thumb3.png',
+    
+    
     live: '',
     github:"",
 
