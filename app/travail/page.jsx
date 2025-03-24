@@ -62,7 +62,7 @@ import WorkSliderBtns from '@/components/ui/WorkSliderBtns';
   },
 
  ]
-const travail = () => {
+const Travail = () => {
   const[project, setProject] = useState(projects[0]);
 
   const handleSlideChange= (swiper) =>{
