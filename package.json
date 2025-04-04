@@ -1,12 +1,14 @@
 {
-  "homepage": "https://hib-code.gihub.io/rochdi-hiba",
+  "homepage": "https://hib-code.github.io/rochdi-hiba",
+
   "name": "potf2",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build && npm run export",
+    "deploy": "gh-pages -d out",
+    "export": "next export",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
