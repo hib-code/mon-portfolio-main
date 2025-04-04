@@ -29,7 +29,7 @@ import WorkSliderBtns from '@/components/ui/WorkSliderBtns';
     
     
     live: '',
-    github:"",
+    github:"https://github.com/hib-code/jarvisAI",
 
   },
   {
@@ -43,7 +43,7 @@ import WorkSliderBtns from '@/components/ui/WorkSliderBtns';
     
     
     live: '',
-    github:"",
+    github:"https://github.com/hib-code/Dervox-Monitor-Serve-DMS-",
 
   },
   {
