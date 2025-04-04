@@ -83,6 +83,21 @@ const education = {
       duration: "2023-2025", 
     },
     {
+      institution: "udemy ",
+      degree: "SAA-C03 AWS CERTIFIED ",
+      duration: " 2025", 
+    },
+    {
+      institution: "udemy ",
+      degree: "DVA-C02 AWS CERTIFIED ",
+      duration: " 2025", 
+    },
+    {
+      institution: "udemy ",
+      degree: "AZ-900:MICROSOFT AZURE FUNDAMENALS ",
+      duration: " 2025", 
+    },
+    {
       institution: " microsoft ",
       degree: "front-end developpement",
       duration: "2024", 
