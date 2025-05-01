@@ -13,7 +13,7 @@ const Home = () => {
         <span className="text-xl"> développeur full-stack </span>
         <h1 className="h1 mb-6">Je suis <br /> <span className="text-accent">Rochdi Hiba </span></h1>
         <p className="max-w-[500px] mb-9 text-white/80">
-        <p>J&apos;excellente dans la création d&apos;applications web...</p>
+        <p>J&apos;excelle dans la création d&apos;applications web...</p>
  complètes et élégantes, 
         en maîtrisant à la fois le développement front-end et back-end,
          ainsi que divers langages et technologies de programmation, 
