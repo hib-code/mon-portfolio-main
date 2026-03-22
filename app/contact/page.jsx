@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
 const info = [
   { icon: <FaPhoneAlt />, title: 'Téléphone', description: '(+212) 6 12 46 31 72' },
@@ -19,23 +18,33 @@ const Contact = () => {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs.sendForm(
-      "service_jvfie6b", 
-      "template_ukcq048", 
-      formRef.current,
-      "tbseuLh8Qbdq-K-im" 
-    ).then((result) => {
-      alert("Message envoyé avec succès !");
+    const formData = new FormData(formRef.current);
+    const endpoint = "https://formspree.io/f/mqeyorjb"; 
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        alert("Message envoyé avec succès !");
+        formRef.current.reset();
+      } else {
+        alert("Erreur lors de l'envoi du message.");
+      }
+    } catch (error) {
+      alert("Erreur réseau : " + error.message);
+    } finally {
       setLoading(false);
-      formRef.current.reset();
-    }, (error) => {
-      alert("Erreur lors de l'envoi : " + error.text);
-      setLoading(false);
-    });
+    }
   };
 
   return (
