@@ -28,20 +28,22 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  // ✅ Formspree handleSubmit
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Création du mailto
-    const subject = encodeURIComponent("Merci pour votre contact");
-    const body = encodeURIComponent(
-      `Nom: ${formData.firstName} ${formData.lastName}\n` +
-      `Email: ${formData.email}\n` +
-      `Téléphone: ${formData.phone}\n` +
-      `Service: ${formData.service}\n` +
-      `Message: ${formData.message}`
-    );
+    const response = await fetch("https://formspree.io/f/mqeyorjb", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-    window.location.href = `mailto:hibarochdi1234@gmail.com?subject=${subject}&body=${body}`;
+    if (response.ok) {
+      alert("Message envoyé avec succès !");
+      setFormData({ firstName:"", lastName:"", email:"", phone:"", service:"", message:"" });
+    } else {
+      alert("Erreur lors de l'envoi.");
+    }
   };
 
   return (
@@ -51,6 +53,7 @@ const Contact = () => {
       className="min-h-screen py-10 mb-10 flex items-center justify-center"
     >
       <div className="container mx-auto flex flex-col xl:flex-row gap-[30px] items-start">
+        
         {/* Formulaire */}
         <div className="xl:w-[60%]">
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl w-full">
