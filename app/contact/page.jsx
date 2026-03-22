@@ -1,74 +1,88 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 const info = [
-  { 
-    icon: <FaPhoneAlt />,
-    title: 'Telephone',
-    description: '(+212) 6 12 46 31 72',
-  },
-  { 
-    icon: <FaEnvelope />,
-    title: 'Email',
-    description: 'hibarochdi1234@gmail.com',
-  },
-  { 
-    icon: <FaMapMarkedAlt />,
-    title: 'Adresse',
-    description: 'Hay Essalam bloc G N15',
-  },
+  { icon: <FaPhoneAlt />, title: 'Téléphone', description: '(+212) 6 12 46 31 72' },
+  { icon: <FaEnvelope />, title: 'Email', description: 'hibarochdi1234@gmail.com' },
+  { icon: <FaMapMarkedAlt />, title: 'Adresse', description: 'Hay Essalam bloc G N15' },
 ];
 
 const Contact = () => {
+  const formRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs.sendForm(
+      "service_jvfie6b", 
+      "template_ukcq048", 
+      formRef.current,
+      "tbseuLh8Qbdq-K-im" 
+    ).then((result) => {
+      alert("Message envoyé avec succès !");
+      setLoading(false);
+      formRef.current.reset();
+    }, (error) => {
+      alert("Erreur lors de l'envoi : " + error.text);
+      setLoading(false);
+    });
+  };
+
   return (
     <motion.section 
       initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
-      }}
+      animate={{ opacity: 1, transition: { delay: 0.2, duration: 0.4, ease: "easeIn" } }}
       className="min-h-screen py-10 mb-10 flex items-center justify-center"
     >
       <div className="container mx-auto flex flex-col xl:flex-row gap-[30px] items-start">
-        {/* Formulaire à gauche */}
+        
+        {/* Formulaire */}
         <div className="xl:w-[60%]">
-          <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl w-full"> 
+          <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl w-full">
             <h3 className="text-4xl text-accent">Travaillons ensemble</h3>
-            <p className="text-white/60">Ensemble, construisons des solutions adaptées à vos besoins, avec innovation et expertise.</p>
+            <p className="text-white/60">
+              Ensemble, construisons des solutions adaptées à vos besoins, avec innovation et expertise.
+            </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Input className="w-full" type="text" placeholder="Nom" />
-              <Input className="w-full" type="text" placeholder="Prenom" />
-              <Input className="w-full" type="email" placeholder="Adresse Email" />
-              <Input className="w-full" type="tel" placeholder="Téléphone" />
+              <Input name="firstName" type="text" placeholder="Nom" required />
+              <Input name="lastName" type="text" placeholder="Prénom" required />
+              <Input name="email" type="email" placeholder="Adresse Email" required />
+              <Input name="phone" type="tel" placeholder="Téléphone" required />
             </div>
-            
-            <Select>
+
+            <Select name="service">
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Sélectionner un service" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Sélectionner un service</SelectLabel>
-                  <SelectItem value="est">Développement web</SelectItem>
-                  <SelectItem value="ost">Réseaux</SelectItem>
-                  <SelectItem value="nst">Animation</SelectItem>
+                  <SelectItem value="Développement web">Développement web</SelectItem>
+                  <SelectItem value="Réseaux">Réseaux</SelectItem>
+                  <SelectItem value="Animation">Animation</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
 
-            <Textarea className="h-[150px]" placeholder="Entrer votre message ici" />
-            <Button className="mt-4">Envoyer</Button>
+            <Textarea name="message" className="h-[150px]" placeholder="Entrer votre message ici" required />
+            <Button type="submit" className="mt-4" disabled={loading}>
+              {loading ? "Envoi..." : "Envoyer"}
+            </Button>
           </form>
         </div>
 
-       
+        {/* Informations de contact */}
         <div className="xl:w-[40%] flex flex-col gap-10">
           <ul className="flex flex-col gap-10">
             {info.map((item, index) => (
@@ -87,6 +101,6 @@ const Contact = () => {
       </div>
     </motion.section>
   );
-}
+};
 
 export default Contact;
