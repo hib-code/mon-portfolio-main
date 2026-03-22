@@ -28,7 +28,7 @@ const about = {
     },
     {
       fieldName: "Email",
-      fieldValue: " hibarochdi775@gmail.com"
+      fieldValue: " hibarochdi1234@gmail.com"
     },
     {
       fieldName: "languages",
@@ -47,17 +47,36 @@ const experience = {
       company: "La Province",
       position: "Conception et configuration de réseaux",
       duration: "01-08-2024 au 30-09-2024", 
+      experience: [
+      "Analyse et conception de l'architecture réseau",
+      "Configuration et gestion des routeurs, switches et VLANs",
+      "Mise en place de politiques de sécurité réseau",
+      "Tests de connectivité et dépannage des infrastructures"
+    ]
     },
     {
       company: "Dervox",
       position: "Front-End & Back-End developper",
       duration: "2025 - present", 
+      experience: [
+      "Développement et maintenance de l'interface utilisateur avec React et Tailwind CSS",
+      "Création et intégration d'API pour le backend avec Node.js et PHP",
+      "Gestion de bases de données et optimisation des requêtes SQL",
+      "Déploiement d'applications web et configuration de serveurs",
+      "Mise en place de fonctionnalités de monitoring et gestion des alertes serveur"
+    ]
     },
-    {
+   {
       company: "freelance",
-      position: "backend  ",
-      duration: "2024 - present", 
-    },
+      position: "Backend Developer",
+      duration: "2024 - present",
+      experience: [
+        "Création et configuration d'un serveur web sous Ubuntu Server",
+        "Mise en place de services web et gestion de bases de données",
+        "Configuration du stockage et gestion des fichiers sur le serveur",
+        "Déploiement d'applications backend et maintenance du serveur"
+      ]
+    }
   ],
 };
 
@@ -73,9 +92,14 @@ const education = {
       duration: "2024", 
     },
     {
-      institution: " udemy",
-      degree: "build complite AI ",
-      duration: "2024", 
+      institution: " cisco",
+      degree: "CCNA ",
+      duration: "2026", 
+    },
+        {
+      institution: " cisco",
+      degree: "IT Customer Support Basics ",
+      duration: "2026", 
     },
     {
       institution: "MIAGE ",
@@ -98,9 +122,9 @@ const education = {
       duration: " 2025", 
     },
     {
-      institution: " microsoft ",
-      degree: "front-end developpement",
-      duration: "2024", 
+      institution: " UM6P - Morrocco Digital Accademy ",
+      degree: "AI Foundations for Everyone",
+      duration: "2025", 
     },
     {
       institution: " udemy ",
@@ -120,6 +144,11 @@ const skills = {
   icon: <FaCss3 />,
   name: "css 3",
   },
+    {
+    icon: <FaNetworkWired />,
+    name: "Réseaux et sécurité IT",
+  },
+
   {
     icon: <FaJs />,
     name: "javascript",
