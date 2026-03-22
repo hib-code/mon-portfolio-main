@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,62 +15,58 @@ const info = [
 ];
 
 const Contact = () => {
-  const formRef = useRef(null);
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    
+    // Création du mailto
+    const subject = encodeURIComponent("Merci pour votre contact");
+    const body = encodeURIComponent(
+      `Nom: ${formData.firstName} ${formData.lastName}\n` +
+      `Email: ${formData.email}\n` +
+      `Téléphone: ${formData.phone}\n` +
+      `Service: ${formData.service}\n` +
+      `Message: ${formData.message}`
+    );
 
-    const formData = new FormData(formRef.current);
-    const endpoint = "https://formspree.io/f/mqeyorjb"; 
-
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        alert("Message envoyé avec succès !");
-        formRef.current.reset();
-      } else {
-        alert("Erreur lors de l'envoi du message.");
-      }
-    } catch (error) {
-      alert("Erreur réseau : " + error.message);
-    } finally {
-      setLoading(false);
-    }
+    window.location.href = `mailto:hibarochdi1234@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
-    <motion.section 
+    <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { delay: 0.2, duration: 0.4, ease: "easeIn" } }}
       className="min-h-screen py-10 mb-10 flex items-center justify-center"
     >
       <div className="container mx-auto flex flex-col xl:flex-row gap-[30px] items-start">
-        
         {/* Formulaire */}
         <div className="xl:w-[60%]">
-          <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl w-full">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl w-full">
             <h3 className="text-4xl text-accent">Travaillons ensemble</h3>
             <p className="text-white/60">
               Ensemble, construisons des solutions adaptées à vos besoins, avec innovation et expertise.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Input name="firstName" type="text" placeholder="Nom" required />
-              <Input name="lastName" type="text" placeholder="Prénom" required />
-              <Input name="email" type="email" placeholder="Adresse Email" required />
-              <Input name="phone" type="tel" placeholder="Téléphone" required />
+              <Input name="firstName" placeholder="Nom" value={formData.firstName} onChange={handleChange} required />
+              <Input name="lastName" placeholder="Prénom" value={formData.lastName} onChange={handleChange} required />
+              <Input name="email" type="email" placeholder="Adresse Email" value={formData.email} onChange={handleChange} required />
+              <Input name="phone" placeholder="Téléphone" value={formData.phone} onChange={handleChange} required />
             </div>
 
-            <Select name="service">
+            <Select name="service" value={formData.service} onValueChange={val => setFormData(prev => ({ ...prev, service: val }))}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Sélectionner un service" />
               </SelectTrigger>
@@ -84,10 +80,8 @@ const Contact = () => {
               </SelectContent>
             </Select>
 
-            <Textarea name="message" className="h-[150px]" placeholder="Entrer votre message ici" required />
-            <Button type="submit" className="mt-4" disabled={loading}>
-              {loading ? "Envoi..." : "Envoyer"}
-            </Button>
+            <Textarea name="message" className="h-[150px]" placeholder="Entrer votre message ici" value={formData.message} onChange={handleChange} required />
+            <Button type="submit" className="mt-4">Envoyer</Button>
           </form>
         </div>
 
